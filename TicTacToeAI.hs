@@ -71,7 +71,7 @@ movesOver xss n = if ([xss!!(i-1)!!(j-1) /= '.' | i <- [1..n], j <- [1..n]] == t
 
 minimax :: [String] -> Int -> Int -> Bool -> Int
 minimax xss n depth tf
-      | depth > 4 = 0
+      | depth > 3 = 0
       | win xss == 1 = 100-depth
       | win xss == -1 = depth-100
       | movesOver xss n = 0
@@ -79,7 +79,7 @@ minimax xss n depth tf
       | otherwise = minimum [minimax (x i j xss) n (depth+1) (not tf) | i <- [1..n], j <- [1..n], xss!!(i-1)!!(j-1) == '.']
 
 whosMax :: [((Int, Int), Int)] -> ((Int, Int), Int)
-whosMax [] = ((0,0),0)
+whosMax [] = ((0, 0), 0)
 whosMax [(pair, x)] = (pair, x)
 whosMax ((pair, x):rest)
       | x > (snd restMax) = (pair, x)
